@@ -1,0 +1,14 @@
+# input
+qa_dataset_path: /mnt/sdd/OTT-QAMountSpace/Dataset/COS/ott_dev_q_to_tables_with_bm25neg.json
+table_data_path: /mnt/sdd/OTT-QAMountSpace/Dataset/COS/ott_table_chunks_original.json
+passage_data_path: /mnt/sdd/OTT-QAMountSpace/Dataset/COS/ott_wiki_passages.json
+
+# output
+final_result_path: retrieved_bipartite_subgraph.jsonl
+
+# experimental setting
+## retrieve edges & tables
+top_k_of_retrieved_edges: 400
+
+## rerank edges & tables
+top_k_of_reranked_edges: 100

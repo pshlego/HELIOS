@@ -1,0 +1,9 @@
+# input
+qa_dataset_path: OTT-QAMountSpace/Dataset/COS/ott_dev_q_to_tables_with_bm25neg.json
+table_data_path: OTT-QAMountSpace/Dataset/COS/ott_table_chunks_original.json
+passage_data_path: OTT-QAMountSpace/Dataset/COS/ott_wiki_passages.json
+retrieval_results_path: expanded_bipartite_subgraph.jsonl
+graph_data_path: OTT-QAMountSpace/Dataset/Ours/Early_Fused_Results/table_chunks_to_passages_cos_table_passage.jsonl
+
+# output
+final_result_path: final_graph.jsonl

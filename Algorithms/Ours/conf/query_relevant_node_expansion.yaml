@@ -1,0 +1,11 @@
+# input
+qa_dataset_path: OTT-QAMountSpace/Dataset/COS/ott_dev_q_to_tables_with_bm25neg.json
+table_data_path: OTT-QAMountSpace/Dataset/COS/ott_table_chunks_original.json
+passage_data_path: OTT-QAMountSpace/Dataset/COS/ott_wiki_passages.json
+retrieval_results_path: retrieved_bipartite_subgraph.jsonl
+
+# output
+final_result_path: expanded_bipartite_subgraph.jsonl
+
+# experimental setting
+beam_size: 10

@@ -1,0 +1,5 @@
+collection_root_dir_path: /mnt/sdf/OTT-QAMountSpace/Dataset/Ours/Embedding_Dataset/edge/top_1
+collection_tsv_path: /mnt/sdf/OTT-QAMountSpace/Dataset/Ours/Embedding_Dataset/edge/top_1/edge_topk_1.tsv
+colbert_checkpoint: /mnt/sdf/OTT-QAMountSpace/ModelCheckpoints/Ours/ColBERT/edge_trained_v2
+query_maxlen: 32
+index_name: edge_embedder
