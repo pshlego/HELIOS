@@ -109,52 +109,52 @@ We made a docker image of our environment.
 Please download from docker cloud.
 
 1. Download our image from docker cloud
-    ```bash
-    docker pull anonymous824/heliosworkspace:latest
-    
-    docker pull anonymous824/heliosresources:latest
-    ```
+```bash
+docker pull anonymous824/heliosworkspace:latest
+
+docker pull anonymous824/heliosresources:latest
+```
 
 ### Create HELIOS Workspace
 
 Create a helios workspace using the downloaded image.
 
 1. Docker run
-    ```bash
-    docker run -itd --name acl2025-heliosworkspace anonymous824/heliosworkspace /bin/bash
-    ```
+```bash
+docker run -itd --name acl2025-heliosworkspace anonymous824/heliosworkspace /bin/bash
+```
 2. Docker start
-    ```bash
-    docker start acl2025-heliosworkspace
-    ```
+```bash
+docker start acl2025-heliosworkspace
+```
 3. Docker init
-    ```bash
-    docker init acl2025-heliosworkspace
-    ```
+```bash
+docker init acl2025-heliosworkspace
+```
 
 ### Activate Conda Env
-    ```bash
-    conda activate fm
-    ```
+```bash
+conda activate fm
+```
 
 ### Download Dataset and Model Checkpoints
 
 1. Docker run
-    ```bash
-    docker run -itd --name acl2025-heliosresources anonymous824/heliosresources /bin/bash
-    ```
+```bash
+docker run -itd --name acl2025-heliosresources anonymous824/heliosresources /bin/bash
+```
 2. Docker start
-    ```bash
-    docker start acl2025-heliosresources
-    ```
+```bash
+docker start acl2025-heliosresources
+```
 3. Docker init
-    ```bash
-    docker init acl2025-heliosresources
-    ```
+```bash
+docker init acl2025-heliosresources
+```
 4. Download large language model
-    ```bash
-    HF_HUB_ENABLE_HF_TRANSFER=1 huggingface-cli download meta-llama/Llama-3.1-8B-Instruct --local-dir-use-symlinks False --local-dir /mnt/sdd/OTT-QAMountSpace/ModelCheckpoints/Ours/llm/Meta-Llama-3.1-8B-Instruct --exclude *.pth
-    ```
+```bash
+HF_HUB_ENABLE_HF_TRANSFER=1 huggingface-cli download meta-llama/Llama-3.1-8B-Instruct --local-dir-use-symlinks False --local-dir /mnt/sdd/OTT-QAMountSpace/ModelCheckpoints/Ours/llm/Meta-Llama-3.1-8B-Instruct --exclude *.pth
+```
 
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
@@ -184,114 +184,114 @@ For detailed explanation or for a more fine-grained run, jump to <a href="#quick
 ## Build Index
 
 1. Create edge index
-    ```bash
-    sh Algorithms/Ours/scripts/build_edge_index.sh
-    ```
+```bash
+sh Algorithms/Ours/scripts/build_edge_index.sh
+```
 2. Create table segment index
-    ```bash
-    sh Algorithms/Ours/scripts/build_table_segment_index.sh
-    ```
+```bash
+sh Algorithms/Ours/scripts/build_table_segment_index.sh
+```
 3. Create passage index
-    ```bash
-    sh Algorithms/Ours/scripts/build_passage_index.sh
-    ```
+```bash
+sh Algorithms/Ours/scripts/build_passage_index.sh
+```
 
 ## Run Edge-based Bipartite Subgraph Retrieval
 0. If tmux is not installed, run the following command
-    ```bash
-    apt-get install tmux
-    ```
+```bash
+apt-get install tmux
+```
 1. Load edge retriever
-    ```bash
-    tmux new -s edge_retriever
-    conda activate fm
-    cd HELIOS
-    sh Algorithms/Ours/scripts/load_edge_retriever.sh
-    ```
+```bash
+tmux new -s edge_retriever
+conda activate fm
+cd HELIOS
+sh Algorithms/Ours/scripts/load_edge_retriever.sh
+```
 2. Load edge reranker
-    ```bash
-    tmux new -s edge_reranker
-    conda activate fm
-    cd HELIOS
-    sh Algorithms/Ours/scripts/load_edge_reranker.sh
-    ```
+```bash
+tmux new -s edge_reranker
+conda activate fm
+cd HELIOS
+sh Algorithms/Ours/scripts/load_edge_reranker.sh
+```
 3. Run bipartite subgraph retrieval
-    ```bash
-    sh Algorithms/Ours/scripts/run_edge_based_bipartite_subgraph_retrieval.sh
-    ```
+```bash
+sh Algorithms/Ours/scripts/run_edge_based_bipartite_subgraph_retrieval.sh
+```
 
 ## Run Query-relevant Node Expansion
 0. Kill edge retriever session
-    ```bash
-    tmux kill-session -t edge_retriever
-    ```
+```bash
+tmux kill-session -t edge_retriever
+```
 1. Load seed node scorer
-    ```bash
-    tmux new -s node_scorer
-    conda activate fm
-    cd HELIOS
-    sh Algorithms/Ours/scripts/load_seed_node_scorer.sh
-    ```
+```bash
+tmux new -s node_scorer
+conda activate fm
+cd HELIOS
+sh Algorithms/Ours/scripts/load_seed_node_scorer.sh
+```
 2. Load table segment retriever
-    ```bash
-    tmux new -s table_segment_retriever
-    conda activate fm
-    cd HELIOS
-    sh Algorithms/Ours/scripts/load_table_segment_retriever.sh
-    ```
+```bash
+tmux new -s table_segment_retriever
+conda activate fm
+cd HELIOS
+sh Algorithms/Ours/scripts/load_table_segment_retriever.sh
+```
 3. Load passage retriever
-    ```bash
-    tmux new -s passage_retriever
-    conda activate fm
-    cd HELIOS
-    sh Algorithms/Ours/scripts/load_passage_retriever.sh
-    ```
+```bash
+tmux new -s passage_retriever
+conda activate fm
+cd HELIOS
+sh Algorithms/Ours/scripts/load_passage_retriever.sh
+```
 4. Run query-relevant node expansion
-    ```bash
-    sh Algorithms/Ours/scripts/run_query_relevant_node_expansion.sh
-    ```
+```bash
+sh Algorithms/Ours/scripts/run_query_relevant_node_expansion.sh
+```
 
 ## Run Star-based LLM Refinement
 0. Kill edge retriever session
-    ```bash
-    tmux kill-session -t edge_reranker
-    tmux kill-session -t node_scorer
-    tmux kill-session -t table_segment_retriever
-    tmux kill-session -t passage_retriever
-    ```
+```bash
+tmux kill-session -t edge_reranker
+tmux kill-session -t node_scorer
+tmux kill-session -t table_segment_retriever
+tmux kill-session -t passage_retriever
+```
 1. Load large language model
-    ```bash
-    tmux new -s llm
-    conda activate fm
-    cd HELIOS
-    sh Algorithms/Ours/scripts/load_llm.sh
-    ```
+```bash
+tmux new -s llm
+conda activate fm
+cd HELIOS
+sh Algorithms/Ours/scripts/load_llm.sh
+```
 2. Run star-based llm refinement
-    ```bash
-    sh Algorithms/Ours/scripts/run_star_based_llm_refinement.sh
-    ```
+```bash
+sh Algorithms/Ours/scripts/run_star_based_llm_refinement.sh
+```
 
 ## Evaluate Retrieval Accuracy
 0. Evaluate AnswerRecall@K
-    ```bash
-    sh Algorithms/Ours/scripts/eval_answer_recall.sh
-    ```
+```bash
+sh Algorithms/Ours/scripts/eval_answer_recall.sh
+```
 1. Evaluate nDCG@K
-    ```bash
-    sh Algorithms/Ours/scripts/eval_ndcg.sh
-    ```
+```bash
+sh Algorithms/Ours/scripts/eval_ndcg.sh
+```
 2. Evaluate HITS@4K
-    ```bash
-    sh Algorithms/Ours/scripts/eval_hits.sh
-    ```
+```bash
+sh Algorithms/Ours/scripts/eval_hits.sh
+```
 
 ## Evaluate Reading Accuracy
 0. Convert retrieval results into reader input
-    ```bash
-    sh Algorithms/Ours/scripts/get_reader_input.sh
-    ```
+```bash
+sh Algorithms/Ours/scripts/get_reader_input.sh
+```
 1. Evaluate Exact Match & F1 Score
-    ```bash
-    sh Algorithms/Ours/scripts/eval_reading_accuracy.sh
-    ```
+```bash
+sh Algorithms/Ours/scripts/eval_reading_accuracy.sh
+```
 <!-- CONTACT -->
