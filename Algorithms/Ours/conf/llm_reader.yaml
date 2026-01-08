@@ -1,0 +1,14 @@
+table_data_path: /mnt/sdf/OTT-QAMountSpace/Dataset/COS/ott_table_chunks_original.json
+passage_data_path: /mnt/sdf/OTT-QAMountSpace/Dataset/COS/ott_wiki_passages.json
+result_path: /mnt/sdf/OTT-QAMountSpace/ExperimentResults/reading_output/end_to_end.jsonl
+retrieved_results_path: /mnt/sdf/OTT-QAMountSpace/experimental_results/expanded_query_retrieval.json
+
+prompt_temp_type: end_to_end
+llm_checkpoint_path: /mnt/sdf/OTT-QAMountSpace/ModelCheckpoints/Ours/llm/Meta-Llama-3-70B-Instruct
+table_and_linked_passages_trim_length: 96
+passage_trim_length: 96
+mex_model_length: 8192
+tensor_parallel_size: 4
+gpu_memory_utilization: 0.8
+topk: 10
+sensitive_keywords: ["temperature", "city", "country", "state", "province"]
